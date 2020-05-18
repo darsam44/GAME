@@ -15,6 +15,7 @@ public class GameGuiPerfect {
 	public double x;
 	public double y;
 	public int Winner;
+	boolean nameWasPick;
 	ArrayList<String> players = new ArrayList<String>();
 	PlayGround game;
 	Database data;
@@ -25,6 +26,7 @@ public class GameGuiPerfect {
 	public GameGuiPerfect() {
 		game = new PlayGround(this);
 		data = new Database();
+		this.nameWasPick=false;
 		initGUI();
 	}
 
@@ -52,7 +54,9 @@ public class GameGuiPerfect {
 		paitboard();
 		paintPlaceOfPicks();
 		if (game.getGameOn()) {
-			askforname();
+			if (!nameWasPick) {
+				askforname();
+			}
 			FirstPicks();
 			SecondtPicks();
 			if (finish_picks) {
@@ -77,6 +81,7 @@ public class GameGuiPerfect {
 				null, "Player 2 what yoru username?");
 		this.players.add(s);
 		this.players.add(s2);
+		this.nameWasPick = true;
 	}
 
 	private void paitboard() {

@@ -10,13 +10,14 @@ public class Database {
 
 	public static void main(String[] args) throws Exception {
 		//		getConnection();
-		ArrayList<String> players = new ArrayList<String>();
-		players.add("dar");
-		players.add("Moti");
-		Insert(players , 1);
+//		ArrayList<String> players = new ArrayList<String>();
+//		players.add("dar");
+//		players.add("Moti");
+//		Insert(players , 1);
 		//		Insert2();
 
 	}
+	public Database() {}
 
 	public static void Insert2() {
 		try {
