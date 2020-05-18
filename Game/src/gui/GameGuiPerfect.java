@@ -1,21 +1,30 @@
 package gui;
 
 import java.awt.Color;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import Game.Colors;
+import Game.Database;
 import Game.PlayGround;
 import Game.player;
 
 public class GameGuiPerfect {
 	public double x;
 	public double y;
+	public int Winner;
+	ArrayList<String> players = new ArrayList<String>();
 	PlayGround game;
+	Database data;
 	player p1,p2;
 	private boolean finish_picks;
 
 
 	public GameGuiPerfect() {
 		game = new PlayGround(this);
+		data = new Database();
 		initGUI();
 	}
 
@@ -43,6 +52,7 @@ public class GameGuiPerfect {
 		paitboard();
 		paintPlaceOfPicks();
 		if (game.getGameOn()) {
+			askforname();
 			FirstPicks();
 			SecondtPicks();
 			if (finish_picks) {
@@ -55,6 +65,18 @@ public class GameGuiPerfect {
 			}
 		}
 		StdDrawGame.show();
+	}
+
+	private void askforname() {
+		JFrame input = new JFrame();
+		String s ="";
+		s = JOptionPane.showInputDialog(
+				null, "Player 1 what yoru username?");
+		String s2 ="";
+		s2 = JOptionPane.showInputDialog(
+				null, "Player 2 what yoru username?");
+		this.players.add(s);
+		this.players.add(s2);
 	}
 
 	private void paitboard() {
@@ -241,20 +263,19 @@ public class GameGuiPerfect {
 
 	private void paintWhoIsTheWinner() {
 		StdDrawGame.setPenColor(Color.BLUE);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		if ( p1.getLost() && !p2.getLost()) {
 			StdDrawGame.text(400, 845, "First player won the game" );
+			this.Winner=1;
 		}
 		else if (!p1.getLost() && p2.getLost() ) {
 			StdDrawGame.text(400, 845, "Second player won the game" );
+			this.Winner=2;
 		}
 		else {
 			StdDrawGame.text(400, 845, "Its a tie!" );
+			this.Winner=0;
 		}
+		data.Insert(players, Winner);
 	}
 
 	private String getColor(Colors c) {
