@@ -718,14 +718,18 @@ public final class StdDrawGame implements ActionListener, MouseListener, MouseMo
 	// create the menu bar (changed to private)
 	private static JMenuBar createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
-		JMenu menu1 = new JMenu("Play");
+		JMenu menu1 = new JMenu("Perfect Hit Game");
 
 		menuBar.add(menu1);
 		JMenuItem menuItem1 = new JMenuItem("Play Perfect");
-
-
 		menuItem1.addActionListener(std);
 		menu1.add(menuItem1);
+		JMenuItem menuItem2 = new JMenuItem("10 Best Players");
+		menuItem2.addActionListener(std);
+		menu1.add(menuItem2);
+		JMenuItem menuItem3 = new JMenuItem("My Result");
+		menuItem3.addActionListener(std);
+		menu1.add(menuItem3);
 		return menuBar;
 	}
 
@@ -1653,17 +1657,28 @@ public final class StdDrawGame implements ActionListener, MouseListener, MouseMo
 	}
 	
 	static Thread t;
-//	public static void threadPlatManu() {
-//		t = new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				MyGameGUI.PlayManual();
-//				t.interrupt();
-//			}
-//		});
-//		t.start();
-//	}
+	public static void threadMy_Result() {
+		t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				GameGuiPerfect.My_Result();
+				t.interrupt();
+			}
+		});
+		t.start();
+	}
+	public static void threadBest_Result() {
+		t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				GameGuiPerfect.Best_Result();
+				t.interrupt();
+			}
+		});
+		t.start();
+	}
 	public static void threadPlayAuto() {
 		t = new Thread(new Runnable() {
 			
@@ -1689,6 +1704,13 @@ public static void setGuiGraph(GameGuiPerfect Gui) {
 		if ( str.equals("Play Perfect")){
 			threadPlayAuto();
 		}
+		if ( str.equals("10 Best Players")){
+			threadBest_Result();
+		}
+		if ( str.equals("My Result")){
+			threadMy_Result();
+		}
+		
 
 	}
 

@@ -1,6 +1,10 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -51,9 +55,9 @@ public class GameGuiPerfect {
 
 	public void paint() {
 		StdDrawGame.clear();
-		paitboard();
-		paintPlaceOfPicks();
 		if (game.getGameOn()) {
+			paitboard();
+			paintPlaceOfPicks();
 			if (!nameWasPick) {
 				askforname();
 			}
@@ -293,6 +297,73 @@ public class GameGuiPerfect {
 		default: return null;
 		}
 	}
+
+	public void My_Result() {
+		StdDrawGame.clear();
+		JFrame input = new JFrame();
+		String name ="";
+		name = JOptionPane.showInputDialog(
+				null, "What is your user name?");
+		try {
+			Connection con = data.getConnection();
+			if (con != null) {
+				Statement stm = con.createStatement();
+				String sql = "SELECT * FROM users WHERE user_name = '"+name+"'"; 
+				ResultSet result = stm.executeQuery(sql);
+				if (result.next() ) {
+					StdDrawGame.setPenColor(Color.BLACK);
+					Font font = new Font("Calibri", Font.BOLD, 16);
+					StdDrawGame.setFont(font);
+					int win = result.getInt("win");
+					int lose = result.getInt("lose");
+					int tie = result.getInt("tie");
+					String s = "user name : " + name + " win: " + win + " lose: " + lose+ " tie: "+ tie;
+					StdDrawGame.text(350, 450, s);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "There is no user name with this name: " + name);
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		StdDrawGame.show();
+	}
+
+	public void Best_Result() {
+		StdDrawGame.clear();
+		int num=0;
+		try {
+			Connection con = data.getConnection();
+			if (con != null) {
+				Statement stm = con.createStatement();
+				String sql = "SELECT * FROM users order by win desc limit 10"; 
+				ResultSet result = stm.executeQuery(sql);
+				StdDrawGame.setPenColor(Color.BLACK);
+				Font font = new Font("Calibri", Font.BOLD, 16);
+				StdDrawGame.setFont(font);
+				while (result.next()) {
+					int win = result.getInt("win");
+					int lose = result.getInt("lose");
+					int tie = result.getInt("tie");
+					String name = result.getString("user_name");
+					String s = "user name : " + name + " win: " + win + " lose: " + lose+ " tie: "+ tie;
+					StdDrawGame.text(350, 750-num, s);
+					num +=60;
+				}
+				result.close();
+			}
+			con.close();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		StdDrawGame.show();
+	}
+
+
 
 	/**
 	This function get the point that the user 

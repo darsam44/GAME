@@ -8,50 +8,8 @@ import java.sql.*;
 
 public class Database {
 
-	public static void main(String[] args) throws Exception {
-		//		getConnection();
-//		ArrayList<String> players = new ArrayList<String>();
-//		players.add("dar");
-//		players.add("Moti");
-//		Insert(players , 1);
-		//		Insert2();
-
-	}
 	public Database() {}
-
-	public static void Insert2() {
-		try {
-			int d = 0;
-			Connection con = getConnection();
-			final String s = "dar";
-			String sql = "SELECT * FROM users WHERE user_name = 'dar'";
-			//			String sql ="UPDATE users SET win =2 WHERE user_name = 'dar'";
-			//			String sql = "DELETE FROM users WHERE user_name = 'n' ";
-			//			String sql = "INSERT INTO users (user_name,win,lose,tie) VALUES ('n',0,0,0)";
-			PreparedStatement  stm = con.prepareStatement (sql);
-			//			stm.executeUpdate(sql);
-			ResultSet v = stm.executeQuery();
-			if (v.next()) {
-				d=v.getInt("win") +1;
-				System.out.println("he is " + d);
-			}
-			else {
-				System.out.println("Fail");
-			}
-			String sql1 ="UPDATE users SET win = 0 WHERE user_name = 'dar'";
-			stm.executeUpdate(sql1);
-
-			System.out.println("succssus");
-			con.close();	
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-
-
-	}
-
+	
 	public static void Insert(ArrayList<String> players , int winner) {
 		try {
 			Connection con = getConnection();
@@ -59,10 +17,6 @@ public class Database {
 			String sql ="";
 			String sql_player1 = "SELECT * FROM users WHERE user_name = '"+players.get(0)+"'";
 			String sql_player2 = "SELECT * FROM users WHERE user_name = '"+players.get(1)+"'";
-			//			String sql = "DELETE FROM users WHERE user_name = 'Moti' ";
-			//			players.add("Yotam");
-			//			String sql2 = "INSERT INTO users (user_name,win,lose,tie) VALUES ('"+players.get(0)+"',0,0,0)";
-
 			ResultSet p1 = stm.executeQuery(sql_player1);
 			if (p1.next()) {
 				if (winner == 1) {
@@ -159,12 +113,10 @@ public class Database {
 			Class.forName(driver);
 
 			Connection con = DriverManager.getConnection(url, username , pass);
-			System.out.println("connction is good");
 			return con;
 
 		}
 		catch (Exception e) {
-			System.out.println("connection is not good");
 		}
 		return null;
 	}
