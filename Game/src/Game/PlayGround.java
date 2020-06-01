@@ -160,7 +160,6 @@ public class PlayGround{
 				}
 			}
 			else if ((GameGuiPerfect.x >= 300 && GameGuiPerfect.x <= 320) && (GameGuiPerfect.y >=780 && GameGuiPerfect.y <=800 )) {
-				System.out.println("Yellow");
 				if (!first.b.my_Colors.contains(Colors.YELLOW)) {
 					first.b.my_Colors.add(Colors.YELLOW);
 					count++;
