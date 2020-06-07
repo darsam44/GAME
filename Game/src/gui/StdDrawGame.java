@@ -28,14 +28,12 @@ package gui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.RenderingHints;
-import java.awt.Toolkit;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -72,8 +70,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
-import gui.*;
+
 
 /**
 *  The {@code StdDraw} class provides a basic capability for
@@ -721,6 +718,9 @@ public final class StdDrawGame implements ActionListener, MouseListener, MouseMo
 		JMenu menu1 = new JMenu("Perfect Hit Game");
 
 		menuBar.add(menu1);
+		JMenuItem menuItem4 = new JMenuItem("How To Play");
+		menuItem4.addActionListener(std);
+		menu1.add(menuItem4);
 		JMenuItem menuItem1 = new JMenuItem("Play Perfect");
 		menuItem1.addActionListener(std);
 		menu1.add(menuItem1);
@@ -1690,6 +1690,17 @@ public final class StdDrawGame implements ActionListener, MouseListener, MouseMo
 		});
 		t.start();
 	}
+	public static void threadHow_to_play() {
+		t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				GameGuiPerfect.howToPlay();
+				t.interrupt();
+			}
+		});
+		t.start();
+	}
 
 public static void setGuiGraph(GameGuiPerfect Gui) {
 	GameGuiPerfect=Gui;
@@ -1704,13 +1715,15 @@ public static void setGuiGraph(GameGuiPerfect Gui) {
 		if ( str.equals("Play Perfect")){
 			threadPlayAuto();
 		}
-		if ( str.equals("10 Best Players")){
+		else if ( str.equals("10 Best Players")){
 			threadBest_Result();
 		}
-		if ( str.equals("My Result")){
+		else if ( str.equals("My Result")){
 			threadMy_Result();
 		}
-		
+		else if ( str.equals("How To Play")){
+			threadHow_to_play();
+		}
 
 	}
 
