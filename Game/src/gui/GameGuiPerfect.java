@@ -368,13 +368,13 @@ public class GameGuiPerfect {
 		Font font = new Font("Arial", Font.BOLD, 16);
 		StdDrawGame.setFont(font);
 		StdDrawGame.text(310, 750, "The goal of the game is to find what is the combination of the other player.");
-		StdDrawGame.text(405, 710, "Evrey player have 11 turns each time, if player get a perfect hit and the other player not he win!");
-		StdDrawGame.text(355, 670, "if no one get the combination of the other player after 11 turns or both of them guss");
+		StdDrawGame.text(405, 710, "Every player have 11 turns each time, if player get a perfect hit and the other player not he win!");
+		StdDrawGame.text(355, 670, "if no one get the combination of the other player after 11 turns or both of them guess");
 		StdDrawGame.text(165, 630, "the combination at the same turn its a tie!");
 		
 		StdDrawGame.setPenColor(Color.BLACK);
-		StdDrawGame.text(270, 590, "1) First player choose 4 Colors that his gona be his combination");
-		StdDrawGame.text(285, 550, "2) Second player choose 4 Colors that his gona be his combination");
+		StdDrawGame.text(270, 590, "1) First player choose 4 Colors that his gonna  be his combination");
+		StdDrawGame.text(285, 550, "2) Second player choose 4 Colors that his gonna  be his combination");
 		StdDrawGame.text(380, 510, "3) First player choose 4 Colors that he think this is the combination of the Second player");
 		StdDrawGame.text(315, 470, "4) After First player finish to choose the Colors will appear at the same line");
 		StdDrawGame.text(235, 430, "circle with colors black or brown *(explain in the end)");
